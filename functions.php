@@ -13,3 +13,22 @@ function query($query)
 
     return $rows;
 }
+
+function create($data)
+{
+    global $conn;
+    $nama = htmlspecialchars(trim($data["nama"]));
+    $npm = htmlspecialchars(trim($data["npm"]));
+    $email = htmlspecialchars(trim($data["email"]));
+    $jurusan = htmlspecialchars(trim($data["jurusan"]));
+    $gambar = htmlspecialchars(trim($data["gambar"]));
+
+    $query = "INSERT INTO mahasiswa (nama, npm, email, jurusan, gambar) VALUES (?, ?, ?, ?, ?)";
+
+    $stmt = mysqli_prepare($conn, $query);
+
+    mysqli_stmt_bind_param($stmt, "sssss", $nama, $npm, $email, $jurusan, $gambar);
+    mysqli_stmt_execute($stmt);
+
+    return mysqli_affected_rows($conn);
+}

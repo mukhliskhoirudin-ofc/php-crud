@@ -44,7 +44,7 @@ $mahasiswa = query("SELECT * FROM mahasiswa");
                 <td><?= $mhs["jurusan"]; ?></td>
                 <td>
                     <a href="">update</a> |
-                    <a href="">delete</a>
+                    <a href="delete.php?id=<?= $mhs["id"]; ?>" onclick="return confirm('Data akan dihapus?')">delete</a>
                 </td>
             </tr>
         <?php endforeach; ?>

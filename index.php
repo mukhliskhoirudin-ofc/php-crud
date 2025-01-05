@@ -43,7 +43,7 @@ $mahasiswa = query("SELECT * FROM mahasiswa");
                 <td><?= $mhs["email"]; ?></td>
                 <td><?= $mhs["jurusan"]; ?></td>
                 <td>
-                    <a href="">update</a> |
+                    <a href="update.php?id=<?= $mhs["id"]; ?>">update</a> |
                     <a href="delete.php?id=<?= $mhs["id"]; ?>" onclick="return confirm('Data akan dihapus?')">delete</a>
                 </td>
             </tr>

@@ -66,3 +66,15 @@ function update($data)
 
     return mysqli_affected_rows($conn);
 }
+
+function search($keyword)
+{
+    $query = "SELECT * FROM mahasiswa
+                WHERE
+            nama LIKE '%$keyword%' OR
+            npm LIKE '%$keyword%' OR
+            email LIKE '%$keyword%' OR
+            jurusan LIKE '%$keyword%'";
+
+    return query($query); //kembalikan function query diatas, isi dengan hasil pencarian
+}

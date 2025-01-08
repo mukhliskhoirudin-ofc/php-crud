@@ -139,3 +139,42 @@ function upload()
 
     return $namaFileBaru;
 }
+
+function registrasi($data)
+{
+    global $conn;
+    $username = strtolower(stripslashes($data["username"]));
+    $password = mysqli_real_escape_string($conn, $data["password"]);
+    $passwordConfirm = mysqli_real_escape_string($conn, $data["passwordConfirm"]);
+
+    //cek username sudah ada atau belum
+    $result = mysqli_query($conn, "SELECT username FROM users WHERE username = '$username'");
+
+    if (mysqli_fetch_assoc($result)) {
+        echo "<script>
+                alert('Username sudah terdaftar!');
+              </script>";
+
+        return false;
+    }
+
+    //cek konfirmasi password
+    if ($password !== $passwordConfirm) {
+        echo "<script>
+                alert('Konfirmasi password tidak sesuai');
+             </script>";
+
+        return false;
+    }
+
+    //enkripsi password
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    //tambahkan userbaru ke database
+    $stmt = mysqli_prepare($conn, "INSERT INTO users (username, password) VALUES (?, ?)");
+
+    mysqli_stmt_bind_param($stmt, "ss", $username, $password);
+    mysqli_stmt_execute($stmt);
+
+    return mysqli_affected_rows($conn);
+}

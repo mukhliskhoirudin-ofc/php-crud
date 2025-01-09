@@ -1,5 +1,13 @@
 <?php
 
+session_start();
+
+//ketika sesi di login sudah ada dan telah masuk ke index. tidak bisa lagi akses login di url
+if (isset($_SESSION["login"])) {
+    header("Location: index.php");
+    exit;
+}
+
 require 'functions.php';
 
 if (isset($_POST["btnLogin"])) {
@@ -13,6 +21,9 @@ if (isset($_POST["btnLogin"])) {
     if (mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
         if (password_verify($password, $row["password"])) { //cek password yang belum diacak sama gk dengan hash nya (2 parameter)
+            //set session
+            $_SESSION["login"] = true;
+
             header("Location: index.php");
             exit;
         };

@@ -28,6 +28,9 @@ if (isset($_POST["btnSearch"])) {
 </head>
 
 <body>
+
+    <a href="logout.php">Logout</a>
+
     <h1>Daftar Mahasiswa</h1>
 
     <a href="create.php">Tambah Data Mahasiswa</a>

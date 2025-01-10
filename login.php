@@ -2,13 +2,28 @@
 
 session_start();
 
+require 'functions.php';
+
+//cek kuki
+if (isset($_COOKIE['id']) && isset($_COOKIE['key'])) {
+    $id = $_COOKIE['id'];
+    $key = $_COOKIE['key'];
+
+    //ambil usename berdasarkan id
+    $result = mysqli_query($conn, "SELECT username FROM users WHERE id = $id");
+    $row = mysqli_fetch_assoc($result);
+
+    //cek kuki dan username
+    if ($key === hash('sha256', $row['username'])) {
+        $_SESSION['login'] = true;
+    }
+}
+
 //ketika sesi di login sudah ada dan telah masuk ke index. tidak bisa lagi akses login di url
 if (isset($_SESSION["login"])) {
     header("Location: index.php");
     exit;
 }
-
-require 'functions.php';
 
 if (isset($_POST["btnLogin"])) {
     $username = $_POST["username"];
@@ -23,6 +38,13 @@ if (isset($_POST["btnLogin"])) {
         if (password_verify($password, $row["password"])) { //cek password yang belum diacak sama gk dengan hash nya (2 parameter)
             //set session
             $_SESSION["login"] = true;
+
+            //ketika rememberMe di ceklis
+            if (isset($_POST["rememberMe"])) {
+                //buat kuki
+                setcookie('id', $row['id'], time() + 60);
+                setcookie('key', hash('sha256', $row['username']), time() + 60);
+            }
 
             header("Location: index.php");
             exit;
@@ -59,6 +81,10 @@ if (isset($_POST["btnLogin"])) {
         <div>
             <label for="password">Password :</label><br>
             <input type="password" id="password" name="password">
+        </div>
+        <div>
+            <input type="checkbox" id="rememberMe" name="rememberMe">
+            <label for="rememberMe">Remember me</label>
         </div>
         <br>
         <div>

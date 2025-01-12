@@ -45,8 +45,8 @@ if (isset($_POST["btnSearch"])) {
     <br><br>
 
     <form action="" method="post">
-        <input type="text" name="keyword" size="25" placeholder="Search..." autofocus autocomplete="off">
-        <button type="submit" name="btnSearch">Search</button>
+        <input type="text" name="keyword" size="25" placeholder="Search..." autofocus autocomplete="off" id="keyword">
+        <button type="submit" name="btnSearch" id="btnSearch">Search</button>
     </form>
     <br>
 
@@ -68,33 +68,38 @@ if (isset($_POST["btnSearch"])) {
     <?php endif; ?>
 
     <br>
-    <table border="1" cellpadding="10" cellspacing="0">
-        <tr>
-            <th>No</th>
-            <th>Gambar</th>
-            <th>NPM</th>
-            <th>Nama</th>
-            <th>Email</th>
-            <th>Jurusan</th>
-            <th>Aksi</th>
-        </tr>
-
-        <?php $i = 1; ?>
-        <?php foreach ($mahasiswa as $mhs): ?>
+    <div id="container">
+        <table border="1" cellpadding="10" cellspacing="0">
             <tr>
-                <td><?= $i++ ?></td>
-                <td><img src="img/<?= $mhs["gambar"]; ?>" width="50"></td>
-                <td><?= $mhs["npm"]; ?></td>
-                <td><?= $mhs["nama"]; ?></td>
-                <td><?= $mhs["email"]; ?></td>
-                <td><?= $mhs["jurusan"]; ?></td>
-                <td>
-                    <a href="update.php?id=<?= $mhs["id"]; ?>">update</a> |
-                    <a href="delete.php?id=<?= $mhs["id"]; ?>" onclick="return confirm('Data akan dihapus?')">delete</a>
-                </td>
+                <th>No</th>
+                <th>Gambar</th>
+                <th>NPM</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Jurusan</th>
+                <th>Aksi</th>
             </tr>
-        <?php endforeach; ?>
-    </table>
+
+            <?php $i = 1; ?>
+            <?php foreach ($mahasiswa as $mhs): ?>
+                <tr>
+                    <td><?= $i++ ?></td>
+                    <td><img src="img/<?= $mhs["gambar"]; ?>" width="50"></td>
+                    <td><?= $mhs["npm"]; ?></td>
+                    <td><?= $mhs["nama"]; ?></td>
+                    <td><?= $mhs["email"]; ?></td>
+                    <td><?= $mhs["jurusan"]; ?></td>
+                    <td>
+                        <a href="update.php?id=<?= $mhs["id"]; ?>">update</a> |
+                        <a href="delete.php?id=<?= $mhs["id"]; ?>" onclick="return confirm('Data akan dihapus?')">delete</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+
+    <script src="js/script.js"></script>
+
 </body>
 
 </html>

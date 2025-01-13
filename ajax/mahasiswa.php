@@ -1,8 +1,8 @@
 <?php
+sleep(1);
 require '../functions.php';
 
-$keyword = $_GET["keyword"];
-
+$keyword = isset($_GET["keyword"]) ? $_GET["keyword"] : '';
 $query = "SELECT * FROM mahasiswa
                 WHERE
             nama LIKE '%$keyword%' OR

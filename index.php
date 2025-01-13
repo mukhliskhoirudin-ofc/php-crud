@@ -33,6 +33,16 @@ if (isset($_POST["btnSearch"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman Admin</title>
+    <style>
+        .loader {
+            width: 25px;
+            position: absolute;
+            top: 141px;
+            z-index: -1;
+            left: 220px;
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -47,6 +57,7 @@ if (isset($_POST["btnSearch"])) {
     <form action="" method="post">
         <input type="text" name="keyword" size="25" placeholder="Search..." autofocus autocomplete="off" id="keyword">
         <button type="submit" name="btnSearch" id="btnSearch">Search</button>
+        <img src="img/Circles-menu-3.gif" class="loader">
     </form>
     <br>
 
@@ -98,6 +109,7 @@ if (isset($_POST["btnSearch"])) {
         </table>
     </div>
 
+    <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/script.js"></script>
 
 </body>

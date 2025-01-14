@@ -47,7 +47,7 @@ if (isset($_POST["btnSearch"])) {
 
 <body>
 
-    <a href="logout.php">Logout</a>
+    <a href="logout.php">Logout</a> | <a href="report.php" target="_blank">Cetak</a>
 
     <h1>Daftar Mahasiswa</h1>
 
